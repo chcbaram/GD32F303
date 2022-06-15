@@ -11,10 +11,12 @@
 
 
 
+extern void usbLoop(void);
+
 
 void apInit(void)
 {
-
+  cliOpen(_DEF_UART1, 115200);
 }
 
 void apMain(void)
@@ -29,5 +31,7 @@ void apMain(void)
       pre_time = millis();
       ledToggle(_DEF_LED1);
     }
+
+    cliMain();
   }
 }

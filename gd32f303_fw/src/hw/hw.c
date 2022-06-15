@@ -16,7 +16,14 @@ bool hwInit(void)
 {
   bspInit();
 
+  cliInit();
   ledInit();
+  uartInit();
+  uartOpen(_DEF_UART1, 115200);
+
+  usbInit();
+  usbBegin(USB_CDC_MODE);
+
 
   return true;
 }
