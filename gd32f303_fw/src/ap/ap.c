@@ -11,7 +11,6 @@
 
 
 
-extern void usbLoop(void);
 
 
 void apInit(void)

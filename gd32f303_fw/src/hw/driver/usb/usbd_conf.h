@@ -80,9 +80,9 @@ OF SUCH DAMAGE.
 /* base address offset of the allocation buffer, used for buffer descriptor table and packet memory */
 #define BTABLE_OFFSET                      (0x0000U)
 
-#define USB_PULLUP                         GPIOG
-#define USB_PULLUP_PIN                     GPIO_PIN_8
-#define RCC_AHBPeriph_GPIO_PULLUP          RCU_GPIOG
+#define USB_PULLUP                         GPIOA
+#define USB_PULLUP_PIN                     GPIO_PIN_12
+#define RCC_AHBPeriph_GPIO_PULLUP          RCU_GPIOA
 
 
 #endif /* __USBD_CONF_H */

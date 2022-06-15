@@ -80,7 +80,6 @@ bool usbInit(void)
   gpio_init(USB_PULLUP, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ, USB_PULLUP_PIN);
 
 
-
 #ifdef _USE_HW_CLI
   cliAdd("usb", cliCmd);
 #endif
@@ -147,8 +146,6 @@ bool usbBegin(UsbMode_t usb_mode)
     //
     usbd_connect(&usbd_cdc);
 
-    cdc_acm_data_receive(&usbd_cdc);
-
 
     cdcInit();
 
@@ -194,15 +191,6 @@ void USBD_LP_CAN0_RX0_IRQHandler (void)
     usbd_isr();
 }
 
-void usbLoop(void)
-{
-  if (0U == cdc_acm_check_ready(&usbd_cdc))
-  {
-      //cdc_acm_data_receive(&usbd_cdc);
-  } else {
-      //cdc_acm_data_send(&usbd_cdc);
-  }
-}
 #ifdef _USE_HW_CLI
 void cliCmd(cli_args_t *args)
 {
@@ -232,7 +220,7 @@ void cliCmd(cli_args_t *args)
       if (millis()-pre_time >= 1000)
       {
         pre_time = millis();
-        logPrintf("tx : %d KB/s\n", tx_cnt/1024);
+        logPrintf("tx : %d KB/s\n", (int)tx_cnt/1024);
         tx_cnt = 0;
       }
       cdcWrite((uint8_t *)"123456789012345678901234567890\n", 31);
@@ -254,7 +242,7 @@ void cliCmd(cli_args_t *args)
       if (millis()-pre_time >= 1000)
       {
         pre_time = millis();
-        logPrintf("rx : %d KB/s\n", rx_cnt/1024);
+        logPrintf("rx : %d KB/s\n", (int)rx_cnt/1024);
         rx_cnt = 0;
       }
 
